@@ -15,13 +15,13 @@ def run_command(command, exit_on_fail=True):
 
 def main():
     
-    # Step 1: Generate Alembic migrations
-    print("Generating Alembic migrations...")
-    run_command("alembic revision --autogenerate -m 'create01'")
+    # # Step 1: Generate Alembic migrations
+    # print("Generating Alembic migrations...")
+    # run_command("alembic revision --autogenerate -m 'create01'")
 
-    # Step 2: Apply Alembic migrations
-    print("Applying Alembic migrations...")
-    run_command("alembic upgrade head")
+    # # Step 2: Apply Alembic migrations
+    # print("Applying Alembic migrations...")
+    # run_command("alembic upgrade head")
 
     # Step 3: Start Uvicorn server
     print("Starting Uvicorn server...")
