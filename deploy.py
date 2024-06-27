@@ -44,7 +44,7 @@ def main():
 
     # Step 4: Generate Alembic migrations
     print("Generating Alembic migrations...")
-    run_command("alembic revision --autogenerate -m 'create users table'")
+    run_command("alembic revision --autogenerate -m 'create4545'")
 
     # Step 5: Apply Alembic migrations
     print("Applying Alembic migrations...")
