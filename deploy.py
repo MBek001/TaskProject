@@ -10,32 +10,14 @@ def run_command(command):
         print(f"Command failed with return code {result.returncode}: {command}")
         sys.exit(result.returncode)
 
-def create_virtual_environment(venv_path):
-    """Create a virtual environment if it doesn't exist."""
-    if not os.path.exists(venv_path):
-        print(f"Creating virtual environment at {venv_path}...")
-        venv.create(venv_path, with_pip=True)
-    else:
-        print(f"Virtual environment already exists at {venv_path}")
-
-def activate_virtual_environment(venv_path):
-    """Activate the virtual environment."""
-    activate_script = os.path.join(venv_path, 'bin', 'activate_this.py')
-    if os.path.exists(activate_script):
-        with open(activate_script) as f:
-            exec(f.read(), dict(__file__=activate_script))
-    else:
-        print(f"Could not find the activate script at {activate_script}")
-        sys.exit(1)
-
 def main():
     venv_path = "venv"  # Adjust this path as needed
 
     # Step 1: Create virtual environment if it doesn't exist
-    create_virtual_environment(venv_path)
+    run_command(" virtualenv .venv")
 
     # Step 2: Activate virtual environment
-    activate_virtual_environment(venv_path)
+    run_command("source .venv/bin/activate")
 
     # Step 3: Install requirements from requirements.txt
     print("Installing requirements from requirements.txt...")
