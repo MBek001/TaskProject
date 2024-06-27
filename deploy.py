@@ -3,12 +3,14 @@ import subprocess
 import sys
 import venv
 
-def run_command(command):
+def run_command(command, exit_on_fail=True):
     """Run a shell command and ensure it succeeds."""
     result = subprocess.run(command, shell=True)
     if result.returncode != 0:
         print(f"Command failed with return code {result.returncode}: {command}")
-        sys.exit(result.returncode)
+        if exit_on_fail:
+            sys.exit(result.returncode)
+    return result.returncode
 
 def create_virtual_environment(venv_path):
     """Create a virtual environment if it doesn't exist."""
@@ -44,7 +46,20 @@ def main():
 
     # Step 4: Generate Alembic migrations
     print("Generating Alembic migrations...")
-    run_command("alembic revision --autogenerate -m 'create4545'")
+    alembic_revision_code = run_command("alembic revision --autogenerate -m 'create6363'", exit_on_fail=False)
+
+    if alembic_revision_code != 0:
+        print("Alembic revision generation failed. Checking for existing migrations.")
+        print("Clearing old Alembic migrations...")
+        # Reset Alembic by clearing migration files and the version table (use with caution)
+        migrations_path = os.path.join(os.getcwd(), 'migrations', 'versions')
+        for file in os.listdir(migrations_path):
+            os.remove(os.path.join(migrations_path, file))
+        run_command("alembic downgrade base")
+        run_command("alembic stamp head")
+
+        print("Generating Alembic migrations again...")
+        run_command("alembic revision --autogenerate -m 'create6363'")
 
     # Step 5: Apply Alembic migrations
     print("Applying Alembic migrations...")
@@ -52,7 +67,7 @@ def main():
 
     # Step 6: Start Uvicorn server
     print("Starting Uvicorn server...")
-    run_command("uvicorn main:app --host 0.0.0.0 --port 10000")
+    run_command("uvicorn main:app --host 0.0.0.0 --port 8000")
 
 if __name__ == "__main__":
     main()
