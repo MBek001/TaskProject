@@ -17,7 +17,7 @@ def main():
     
     # Step 1: Generate Alembic migrations
     print("Generating Alembic migrations...")
-    run_command("alembic revision --autogenerate -m 'create12'")
+    run_command("alembic revision --autogenerate -m 'create01'")
 
     # Step 2: Apply Alembic migrations
     print("Applying Alembic migrations...")
