@@ -10,15 +10,19 @@ def run_command(command):
         sys.exit(result.returncode)
 
 def main():
-    # Step 1: Generate Alembic migrations
+     # Step 1: Install bcrypt
+    print("Installing bcrypt...")
+    run_command("pip install bcrypt")
+    
+    # Step 2: Generate Alembic migrations
     print("Generating Alembic migrations...")
     run_command("alembic revision --autogenerate -m 'create users table'")
 
-    # Step 2: Apply Alembic migrations
+    # Step 3: Apply Alembic migrations
     print("Applying Alembic migrations...")
     run_command("alembic upgrade head")
 
-    # Step 3: Start Uvicorn server
+    # Step 4: Start Uvicorn server
     print("Starting Uvicorn server...")
     run_command("uvicorn main:app --host 0.0.0.0 --port 10000")
 
