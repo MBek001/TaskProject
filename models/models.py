@@ -14,7 +14,7 @@ users = Table(
     Column('email', String),
     Column('user_photos', String, default="You have not profile photo yet !",),
     Column('joined_at', TIMESTAMP, default=datetime.utcnow()),
-    Column('is_admin', Boolean, default=True)
+    Column('is_admin', Boolean, default=False)
 )
 
 
