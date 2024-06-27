@@ -22,8 +22,9 @@ def activate_virtual_environment(venv_path):
     """Activate the virtual environment."""
     activate_script = os.path.join(venv_path, 'bin', 'activate')
     if os.path.exists(activate_script):
-        with open(activate_script) as f:
-            exec(f.read(), dict(__file__=activate_script))
+        command = f"source {activate_script}"
+        print(f"Activating virtual environment: {command}")
+        subprocess.run(command, shell=True, check=True, executable="/bin/bash")
     else:
         print(f"Could not find the activate script at {activate_script}")
         sys.exit(1)
@@ -43,7 +44,7 @@ def main():
 
     # Step 4: Generate Alembic migrations
     print("Generating Alembic migrations...")
-    run_command("alembic revision --autogenerate -m 'create usee'")
+    run_command("alembic revision --autogenerate -m 'create users table'")
 
     # Step 5: Apply Alembic migrations
     print("Applying Alembic migrations...")
