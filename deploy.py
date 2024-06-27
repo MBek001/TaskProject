@@ -14,11 +14,7 @@ def run_command(command, exit_on_fail=True):
 
 
 def main():
-    print("Installing bcrypt...")
-    run_command("pip install bcrypt")
-    print("Installing pjwt")
-    run_command("pip install pyjwt")
-
+    
     # Step 1: Generate Alembic migrations
     print("Generating Alembic migrations...")
     run_command("alembic revision --autogenerate -m 'create12'")
