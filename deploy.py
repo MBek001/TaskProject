@@ -14,10 +14,12 @@ def run_command(command, exit_on_fail=True):
 
 
 def main():
+    print("Installing bcrypt...")
+    run_command("pip install bcrypt")
 
     # Step 1: Generate Alembic migrations
     print("Generating Alembic migrations...")
-    run_command("alembic revision --autogenerate -m 'create'")
+    run_command("alembic revision --autogenerate -m 'create12'")
 
     # Step 2: Apply Alembic migrations
     print("Applying Alembic migrations...")
