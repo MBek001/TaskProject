@@ -10,7 +10,7 @@ def run_command(command):
         print(f"Command failed with return code {result.returncode}: {command}")
         sys.exit(result.returncode)
 
-    def create_virtual_environment(venv_path):
+def create_virtual_environment(venv_path):
     """Create a virtual environment if it doesn't exist."""
     if not os.path.exists(venv_path):
         print(f"Creating virtual environment at {venv_path}...")
@@ -32,10 +32,10 @@ def main():
     venv_path = "venv"  # Adjust this path as needed
 
     # Step 1: Create virtual environment if it doesn't exist
-    create_virtual_environment()
+    create_virtual_environment(venv_path)
 
     # Step 2: Activate virtual environment
-    activate_virtual_environment()
+    activate_virtual_environment(venv_path)
 
     # Step 3: Install requirements from requirements.txt
     print("Installing requirements from requirements.txt...")
@@ -43,7 +43,7 @@ def main():
 
     # Step 4: Generate Alembic migrations
     print("Generating Alembic migrations...")
-    run_command("alembic revision --autogenerate -m 'creating db'")
+    run_command("alembic revision --autogenerate -m 'create usee'")
 
     # Step 5: Apply Alembic migrations
     print("Applying Alembic migrations...")
